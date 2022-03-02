@@ -5,7 +5,7 @@ export const ProductList = () => {
 
     useEffect( //event listener. When state changes, run this function
         () => {
-            fetch("http://localhost:8088/products")
+            fetch("http://localhost:8088/products?_expand=productType")
                 .then(res => res.json())
                     .then((productArray) => {
                         setProducts(productArray)
@@ -23,7 +23,7 @@ export const ProductList = () => {
                     (productObject) => {
                         return <div><h3>{productObject.name}</h3>
                             <li>Id: {productObject.id}</li>
-                            <li>Type: {productObject.productTypeId}</li>
+                            <li>Type: {productObject.productType.type}</li>
                             <li>${productObject.price}</li>
                             </div>
                     }
