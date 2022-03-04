@@ -6,7 +6,6 @@ export const EmployeeForm = () => {
     const [employee, updateEmployee] = useState({
         name: "",
         locationId: 1,
-        //still need to add location
         manager: false,
         hourlyWage: 1,
         fullTime: false
@@ -18,7 +17,7 @@ export const EmployeeForm = () => {
         evt.preventDefault()
         const newEmployee = {
             name: employee.name,
-            //still need to add location
+            locationId: 1,
             manager: employee.manager,
             hourlyWage: employee.hourlyWage,
             fullTime: employee.fullTime
@@ -27,14 +26,14 @@ export const EmployeeForm = () => {
         const fetchOption = {
             method: "POST",
             headers: {
-                "Content-Type": ":application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(newEmployee)
         }
 
         return fetch("http://localhost:8088/employees", fetchOption)
             .then(() => {
-                history.push("./employees")
+                history.push("/employees")
             })
     }
 

@@ -8,7 +8,7 @@ export const NavBar = (props) => {
             <p className="navbar__item active">
                 <Link className="navbar__link" to="/locations">Locations</Link>
                 <Link className="navbar__link" to="/products">Products</Link>
-                <Link className="navbar__link" to="/employees">Employees</Link>
+                <Link className="navbar__link" to="/employees/create">Hire Employee</Link>
             </p>
         </div>
     )
