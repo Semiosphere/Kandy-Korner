@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 
+
 export const EmployeeForm = () => {
+
+    const [locations, updateLocation] = useState([])
+    useEffect( //event listener. When state changes, run this function
+        () => {
+            fetch("http://localhost:8088/locations")
+                .then(res => res.json())
+                    .then((locationArray) => {
+                        updateLocation(locationArray)
+                    })
+        },
+        []
+    )
 
     const [employee, updateEmployee] = useState({
         name: "",
@@ -17,7 +30,7 @@ export const EmployeeForm = () => {
         evt.preventDefault()
         const newEmployee = {
             name: employee.name,
-            locationId: 1,
+            locationId: employee.locationId,
             manager: employee.manager,
             hourlyWage: employee.hourlyWage,
             fullTime: employee.fullTime
@@ -57,6 +70,25 @@ export const EmployeeForm = () => {
                             className="form-control"
                             placeholder="Fill in new hire's full name"
                              />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="location">Location: </label>
+                        <select
+                            required autoFocus
+                            type="text"
+                            className="form-control"
+                            onChange={
+                                (evt) => {
+                                    const copy = {...employee}
+                                    copy.locationId = evt.target.value
+                                    updateEmployee(copy)
+                                }
+                            }
+                            ><option value="0">Pick a location</option>
+                            {locations.map(location => <option value={location.id}>{location.address}</option>)}
+                            </select>
                     </div>
                 </fieldset>
                 <fieldset>
