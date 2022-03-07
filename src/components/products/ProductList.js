@@ -13,15 +13,41 @@ export const ProductList = () => {
         },
         []
     )
+    const addProduct = (eventId) => {
+        
+        const purchase = {
+            productId: eventId,
+            locationId: 1,
+            employeeId: 1,
+            customerId: parseInt(localStorage.getItem("kandy_customer")),
+            quantity: 1
+        }
+
+        const fetchOption = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(purchase)
+        }
+
+        return fetch("http://localhost:8088/purchases", fetchOption)
+            .then(() => {
+            })
+    }
+        
+    
+        //addProduct function needs to post a new obj to json.
+        //
 
     return (
         <>
-            <h2>Products</h2>
+            <h2>Products</h2> 
 
             {
                 products.map(
                     (productObject) => {
-                        return <div><h3>{productObject.name}</h3>
+                        return <div><h3>{productObject.name}</h3> <button onClick={() => {addProduct(productObject.id)}}className="btn btn-primary">Add {productObject.name} to cart</button>
                             <li>Id: {productObject.id}</li>
                             <li>Type: {productObject.productType.type}</li>
                             <li>${productObject.price}</li>
@@ -32,3 +58,4 @@ export const ProductList = () => {
         </>
     )
 }
+//when button is clicked, a new purchases obj should appear in api.
