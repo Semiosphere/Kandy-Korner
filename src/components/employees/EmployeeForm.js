@@ -17,6 +17,7 @@ export const EmployeeForm = () => {
     )
 
     const [employee, updateEmployee] = useState({
+        //[var to hold state, var to change state]
         name: "",
         locationId: 1,
         manager: false,
@@ -47,13 +48,19 @@ export const EmployeeForm = () => {
         return fetch("http://localhost:8088/employees", fetchOption)
             .then(() => {
                 history.push("/employees")
+                //reroutes you to localhost:3000/employees
             })
     }
 
     return (
+
+            
         
             <form className="employeeForm">
                 <h2 className="employeeForm__title">Hire New Employee</h2>
+                <button onClick={() => history.push("/employees")} className="btn btn-primary">
+                    Employee List
+                </button>
                 <fieldset>
                     <div className="form-group">
                         <label htmlFor="description">New Hire Name: </label>

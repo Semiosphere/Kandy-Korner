@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 export const ProductList = () => {
-    const [products, setProducts] = useState([])
+    const [product, setProducts] = useState([])
 
     useEffect( //event listener. When state changes, run this function
         () => {
@@ -13,12 +13,12 @@ export const ProductList = () => {
         },
         []
     )
+
+
     const addProduct = (eventId) => {
         
         const purchase = {
             productId: eventId,
-            locationId: 1,
-            employeeId: 1,
             customerId: parseInt(localStorage.getItem("kandy_customer")),
             quantity: 1
         }
@@ -37,15 +37,15 @@ export const ProductList = () => {
     }
         
     
-        //addProduct function needs to post a new obj to json.
-        //
+        
+        
 
     return (
         <>
             <h2>Products</h2> 
 
             {
-                products.map(
+                product.map(
                     (productObject) => {
                         return <div><h3>{productObject.name}</h3> <button onClick={() => {addProduct(productObject.id)}}className="btn btn-primary">Add {productObject.name} to cart</button>
                             <li>Id: {productObject.id}</li>
@@ -58,4 +58,3 @@ export const ProductList = () => {
         </>
     )
 }
-//when button is clicked, a new purchases obj should appear in api.
